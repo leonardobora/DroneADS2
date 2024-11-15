@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_7ab6936c0a2f51e65b24cffa0c4385e2 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+        <div style="position: fixed; 
+                    top: 10px; 
+                    right: 10px; 
+                    width: 300px;
+                    height: auto;
+                    background-color: white;
+                    padding: 10px;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+                    z-index: 1000;">
+            <h3>Relatório de Rotas</h3>
+        <h4>Dia 1</h4><p>Pontos visitados: 6</p><h4>Dia 2</h4><p>Pontos visitados: 6</p><h4>Dia 3</h4><p>Pontos visitados: 6</p><h4>Dia 4</h4><p>Pontos visitados: 6</p>
+                <ul>
+                    <li>Distância: 421.14 km</li>
+                    <li>Tempo total: 0.0 horas</li>
+                    <li>Consumo: 0.0%</li>
+                    <li>Impacto do vento: 0.0%</li>
+                </ul>
+                <h4>Dia 5</h4><p>Pontos visitados: 6</p></div>
+    
+            <div class="folium-map" id="map_7ab6936c0a2f51e65b24cffa0c4385e2" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_7ab6936c0a2f51e65b24cffa0c4385e2 = L.map(
+                "map_7ab6936c0a2f51e65b24cffa0c4385e2",
+                {
+                    center: [-25.4284, -49.2733],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_80fbae1ff977fefb7c017ec9ae6b28c6 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_80fbae1ff977fefb7c017ec9ae6b28c6.addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+            var poly_line_c8ecd91b6b5330179970e63abbc6d558 = L.polyline(
+                [[-25.4233146347775, -49.2160678044742], [-25.4300625729625, -49.2336060009616], [-25.4608672106041, -49.2047594214569], [-25.4936598469491, -49.3400481020638], [-25.4284, -49.2733], [-25.4233146347775, -49.2160678044742]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_00dc30ecd0fdb1b473944586d37415a8 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4cd371787c537993f6316842a32b92a6 = $(`<div id="html_4cd371787c537993f6316842a32b92a6" style="width: 100.0%; height: 100.0%;">Dia 1</div>`)[0];
+                popup_00dc30ecd0fdb1b473944586d37415a8.setContent(html_4cd371787c537993f6316842a32b92a6);
+            
+        
+
+        poly_line_c8ecd91b6b5330179970e63abbc6d558.bindPopup(popup_00dc30ecd0fdb1b473944586d37415a8)
+        ;
+
+        
+    
+    
+            var marker_7f95db23a4f0bea34b9dc17918a86192 = L.marker(
+                [-25.4233146347775, -49.2160678044742],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_cd47db903938121314e1d7a5fa682ea6 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_346912acf87625b696882ee98ab4ecf7 = $(`<div id="html_346912acf87625b696882ee98ab4ecf7" style="width: 100.0%; height: 100.0%;">Dia 1 - Ponto 1</div>`)[0];
+                popup_cd47db903938121314e1d7a5fa682ea6.setContent(html_346912acf87625b696882ee98ab4ecf7);
+            
+        
+
+        marker_7f95db23a4f0bea34b9dc17918a86192.bindPopup(popup_cd47db903938121314e1d7a5fa682ea6)
+        ;
+
+        
+    
+    
+            var marker_5cd889899fb0b7e221b1a18be326709e = L.marker(
+                [-25.4300625729625, -49.2336060009616],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_e5ba5cb3aeca0fcd0473fdc0a9aa61d5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e01d3ae4003305e370e7cd73f521bb91 = $(`<div id="html_e01d3ae4003305e370e7cd73f521bb91" style="width: 100.0%; height: 100.0%;">Dia 1 - Ponto 2</div>`)[0];
+                popup_e5ba5cb3aeca0fcd0473fdc0a9aa61d5.setContent(html_e01d3ae4003305e370e7cd73f521bb91);
+            
+        
+
+        marker_5cd889899fb0b7e221b1a18be326709e.bindPopup(popup_e5ba5cb3aeca0fcd0473fdc0a9aa61d5)
+        ;
+
+        
+    
+    
+            var marker_000845a8b5659f74f701cf842e10599b = L.marker(
+                [-25.4608672106041, -49.2047594214569],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_bde98e0cab8fb8668165c591edc1474d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9024d6eee37cef624c9243f953853d4e = $(`<div id="html_9024d6eee37cef624c9243f953853d4e" style="width: 100.0%; height: 100.0%;">Dia 1 - Ponto 3</div>`)[0];
+                popup_bde98e0cab8fb8668165c591edc1474d.setContent(html_9024d6eee37cef624c9243f953853d4e);
+            
+        
+
+        marker_000845a8b5659f74f701cf842e10599b.bindPopup(popup_bde98e0cab8fb8668165c591edc1474d)
+        ;
+
+        
+    
+    
+            var marker_a425c1b145795c551679bad9013f235f = L.marker(
+                [-25.4936598469491, -49.3400481020638],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_14c9d60d1ef4b7e57343406b403ad3d1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3a60d4e582ca95cc0ddb5486a95e580f = $(`<div id="html_3a60d4e582ca95cc0ddb5486a95e580f" style="width: 100.0%; height: 100.0%;">Dia 1 - Ponto 4</div>`)[0];
+                popup_14c9d60d1ef4b7e57343406b403ad3d1.setContent(html_3a60d4e582ca95cc0ddb5486a95e580f);
+            
+        
+
+        marker_a425c1b145795c551679bad9013f235f.bindPopup(popup_14c9d60d1ef4b7e57343406b403ad3d1)
+        ;
+
+        
+    
+    
+            var marker_b4083234acff358653a816423d1be98d = L.marker(
+                [-25.4284, -49.2733],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_79598d1b5d438ff1e1250ab90e242c44 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_5cd7be6398e80daf891c0d199055a9ba = $(`<div id="html_5cd7be6398e80daf891c0d199055a9ba" style="width: 100.0%; height: 100.0%;">Dia 1 - Ponto 5</div>`)[0];
+                popup_79598d1b5d438ff1e1250ab90e242c44.setContent(html_5cd7be6398e80daf891c0d199055a9ba);
+            
+        
+
+        marker_b4083234acff358653a816423d1be98d.bindPopup(popup_79598d1b5d438ff1e1250ab90e242c44)
+        ;
+
+        
+    
+    
+            var marker_12273cbaff1fd4583aac4a138c316c05 = L.marker(
+                [-25.4233146347775, -49.2160678044742],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_4862a871da8c2b9e5f4d9fe73bbc42f9 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c3d67467b945154963437d6d5488e292 = $(`<div id="html_c3d67467b945154963437d6d5488e292" style="width: 100.0%; height: 100.0%;">Dia 1 - Ponto 6</div>`)[0];
+                popup_4862a871da8c2b9e5f4d9fe73bbc42f9.setContent(html_c3d67467b945154963437d6d5488e292);
+            
+        
+
+        marker_12273cbaff1fd4583aac4a138c316c05.bindPopup(popup_4862a871da8c2b9e5f4d9fe73bbc42f9)
+        ;
+
+        
+    
+    
+            var poly_line_c920bb55ce304c57e02f7e4e1e58be51 = L.polyline(
+                [[-25.4233146347775, -49.2160678044742], [-25.4300625729625, -49.2336060009616], [-25.4608672106041, -49.2047594214569], [-25.4936598469491, -49.3400481020638], [-25.4284, -49.2733], [-25.4233146347775, -49.2160678044742]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_22564364d91813c2bb8731e91ae5534a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a9e7a14bb1721de2c7fca7214de41e63 = $(`<div id="html_a9e7a14bb1721de2c7fca7214de41e63" style="width: 100.0%; height: 100.0%;">Dia 2</div>`)[0];
+                popup_22564364d91813c2bb8731e91ae5534a.setContent(html_a9e7a14bb1721de2c7fca7214de41e63);
+            
+        
+
+        poly_line_c920bb55ce304c57e02f7e4e1e58be51.bindPopup(popup_22564364d91813c2bb8731e91ae5534a)
+        ;
+
+        
+    
+    
+            var marker_51f4fe98eb2f1e9e1a41701bbb4604e9 = L.marker(
+                [-25.4233146347775, -49.2160678044742],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_a74acf52102286e44422636d2f8de2c8 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b334885be8a83fbb8b1804b37db1e259 = $(`<div id="html_b334885be8a83fbb8b1804b37db1e259" style="width: 100.0%; height: 100.0%;">Dia 2 - Ponto 1</div>`)[0];
+                popup_a74acf52102286e44422636d2f8de2c8.setContent(html_b334885be8a83fbb8b1804b37db1e259);
+            
+        
+
+        marker_51f4fe98eb2f1e9e1a41701bbb4604e9.bindPopup(popup_a74acf52102286e44422636d2f8de2c8)
+        ;
+
+        
+    
+    
+            var marker_77181c9dc2f448dd76b877a90d74460d = L.marker(
+                [-25.4300625729625, -49.2336060009616],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_02cbe696850d658cc32b11da5d94a6f4 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_edb22de4f102b907f306504cea3d1bfd = $(`<div id="html_edb22de4f102b907f306504cea3d1bfd" style="width: 100.0%; height: 100.0%;">Dia 2 - Ponto 2</div>`)[0];
+                popup_02cbe696850d658cc32b11da5d94a6f4.setContent(html_edb22de4f102b907f306504cea3d1bfd);
+            
+        
+
+        marker_77181c9dc2f448dd76b877a90d74460d.bindPopup(popup_02cbe696850d658cc32b11da5d94a6f4)
+        ;
+
+        
+    
+    
+            var marker_d6bfc0fb7b05a33e613dbbc341009a89 = L.marker(
+                [-25.4608672106041, -49.2047594214569],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_ff2247e97a14bb747b65412b75b60244 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_527fbe360502274489299616c64e9528 = $(`<div id="html_527fbe360502274489299616c64e9528" style="width: 100.0%; height: 100.0%;">Dia 2 - Ponto 3</div>`)[0];
+                popup_ff2247e97a14bb747b65412b75b60244.setContent(html_527fbe360502274489299616c64e9528);
+            
+        
+
+        marker_d6bfc0fb7b05a33e613dbbc341009a89.bindPopup(popup_ff2247e97a14bb747b65412b75b60244)
+        ;
+
+        
+    
+    
+            var marker_4214ae208ac5c70b3ec83b6dae15f729 = L.marker(
+                [-25.4936598469491, -49.3400481020638],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_a6c906bdcf3f95f3cd237385aacf54e9 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_929715c535e8f4f071ea0d6bbbb53ad4 = $(`<div id="html_929715c535e8f4f071ea0d6bbbb53ad4" style="width: 100.0%; height: 100.0%;">Dia 2 - Ponto 4</div>`)[0];
+                popup_a6c906bdcf3f95f3cd237385aacf54e9.setContent(html_929715c535e8f4f071ea0d6bbbb53ad4);
+            
+        
+
+        marker_4214ae208ac5c70b3ec83b6dae15f729.bindPopup(popup_a6c906bdcf3f95f3cd237385aacf54e9)
+        ;
+
+        
+    
+    
+            var marker_949908563daa93c73357656add8e1d2e = L.marker(
+                [-25.4284, -49.2733],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_92177b3608a9e637652e76172e132b01 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_66506e5c73b8886085e6f347eb6f857e = $(`<div id="html_66506e5c73b8886085e6f347eb6f857e" style="width: 100.0%; height: 100.0%;">Dia 2 - Ponto 5</div>`)[0];
+                popup_92177b3608a9e637652e76172e132b01.setContent(html_66506e5c73b8886085e6f347eb6f857e);
+            
+        
+
+        marker_949908563daa93c73357656add8e1d2e.bindPopup(popup_92177b3608a9e637652e76172e132b01)
+        ;
+
+        
+    
+    
+            var marker_352008643c3c752341a48ba545b70352 = L.marker(
+                [-25.4233146347775, -49.2160678044742],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_f4eb21ca6305204c7b7d6d7fcaa55f35 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_6b130ee496fe9646e0790d2301b9073d = $(`<div id="html_6b130ee496fe9646e0790d2301b9073d" style="width: 100.0%; height: 100.0%;">Dia 2 - Ponto 6</div>`)[0];
+                popup_f4eb21ca6305204c7b7d6d7fcaa55f35.setContent(html_6b130ee496fe9646e0790d2301b9073d);
+            
+        
+
+        marker_352008643c3c752341a48ba545b70352.bindPopup(popup_f4eb21ca6305204c7b7d6d7fcaa55f35)
+        ;
+
+        
+    
+    
+            var poly_line_7a55a652283f29fa406d07de89d668ce = L.polyline(
+                [[-25.4233146347775, -49.2160678044742], [-25.4608672106041, -49.2047594214569], [-25.4284, -49.2733], [-25.4936598469491, -49.3400481020638], [-25.4300625729625, -49.2336060009616], [-25.4233146347775, -49.2160678044742]],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_5d032f1cba64bd0092748d460804fc8f = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_cb667e9ecfe4a0619a962fbc44b460c3 = $(`<div id="html_cb667e9ecfe4a0619a962fbc44b460c3" style="width: 100.0%; height: 100.0%;">Dia 3</div>`)[0];
+                popup_5d032f1cba64bd0092748d460804fc8f.setContent(html_cb667e9ecfe4a0619a962fbc44b460c3);
+            
+        
+
+        poly_line_7a55a652283f29fa406d07de89d668ce.bindPopup(popup_5d032f1cba64bd0092748d460804fc8f)
+        ;
+
+        
+    
+    
+            var marker_1c1a1e7bcdf40eea4b8392f0ce6ab9d5 = L.marker(
+                [-25.4233146347775, -49.2160678044742],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_9f9da1438dcabba68cefb086d04ac8dc = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_6e28d633c6a5390b7e6cde741f140f59 = $(`<div id="html_6e28d633c6a5390b7e6cde741f140f59" style="width: 100.0%; height: 100.0%;">Dia 3 - Ponto 1</div>`)[0];
+                popup_9f9da1438dcabba68cefb086d04ac8dc.setContent(html_6e28d633c6a5390b7e6cde741f140f59);
+            
+        
+
+        marker_1c1a1e7bcdf40eea4b8392f0ce6ab9d5.bindPopup(popup_9f9da1438dcabba68cefb086d04ac8dc)
+        ;
+
+        
+    
+    
+            var marker_b7b3e53211c7140500c6b856618cd3ef = L.marker(
+                [-25.4608672106041, -49.2047594214569],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_f4cb189ea7944e905e00e295b58031bf = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b74c063beaad2833dc39c0d5b161f155 = $(`<div id="html_b74c063beaad2833dc39c0d5b161f155" style="width: 100.0%; height: 100.0%;">Dia 3 - Ponto 2</div>`)[0];
+                popup_f4cb189ea7944e905e00e295b58031bf.setContent(html_b74c063beaad2833dc39c0d5b161f155);
+            
+        
+
+        marker_b7b3e53211c7140500c6b856618cd3ef.bindPopup(popup_f4cb189ea7944e905e00e295b58031bf)
+        ;
+
+        
+    
+    
+            var marker_94da5b75328f390b3a7e9df94b046d95 = L.marker(
+                [-25.4284, -49.2733],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_9fc4c244e968819c5fd90a2fb30eb5d0 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_68fb85ca0b0038e2d04d6f12813d0cbe = $(`<div id="html_68fb85ca0b0038e2d04d6f12813d0cbe" style="width: 100.0%; height: 100.0%;">Dia 3 - Ponto 3</div>`)[0];
+                popup_9fc4c244e968819c5fd90a2fb30eb5d0.setContent(html_68fb85ca0b0038e2d04d6f12813d0cbe);
+            
+        
+
+        marker_94da5b75328f390b3a7e9df94b046d95.bindPopup(popup_9fc4c244e968819c5fd90a2fb30eb5d0)
+        ;
+
+        
+    
+    
+            var marker_24d24a934e2194961db7461dfd658556 = L.marker(
+                [-25.4936598469491, -49.3400481020638],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_b86e06201a76aa0e8854a30de79f2079 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4385836861ee71dcb9b3194459c4b122 = $(`<div id="html_4385836861ee71dcb9b3194459c4b122" style="width: 100.0%; height: 100.0%;">Dia 3 - Ponto 4</div>`)[0];
+                popup_b86e06201a76aa0e8854a30de79f2079.setContent(html_4385836861ee71dcb9b3194459c4b122);
+            
+        
+
+        marker_24d24a934e2194961db7461dfd658556.bindPopup(popup_b86e06201a76aa0e8854a30de79f2079)
+        ;
+
+        
+    
+    
+            var marker_378ffbd49aac9a60f955baaa455cb0e7 = L.marker(
+                [-25.4300625729625, -49.2336060009616],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_05aedc3657a8aeb6f2360bfc602b17de = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ef9ac5d3050dd816b71451ec3f03353c = $(`<div id="html_ef9ac5d3050dd816b71451ec3f03353c" style="width: 100.0%; height: 100.0%;">Dia 3 - Ponto 5</div>`)[0];
+                popup_05aedc3657a8aeb6f2360bfc602b17de.setContent(html_ef9ac5d3050dd816b71451ec3f03353c);
+            
+        
+
+        marker_378ffbd49aac9a60f955baaa455cb0e7.bindPopup(popup_05aedc3657a8aeb6f2360bfc602b17de)
+        ;
+
+        
+    
+    
+            var marker_1b04fd102fa207d3021b9f13130ca236 = L.marker(
+                [-25.4233146347775, -49.2160678044742],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_8f259ce2394b76412f93aa7a0bc35c6c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_deb13717bb5e99abf9e67361a85effaf = $(`<div id="html_deb13717bb5e99abf9e67361a85effaf" style="width: 100.0%; height: 100.0%;">Dia 3 - Ponto 6</div>`)[0];
+                popup_8f259ce2394b76412f93aa7a0bc35c6c.setContent(html_deb13717bb5e99abf9e67361a85effaf);
+            
+        
+
+        marker_1b04fd102fa207d3021b9f13130ca236.bindPopup(popup_8f259ce2394b76412f93aa7a0bc35c6c)
+        ;
+
+        
+    
+    
+            var poly_line_c644a072331a7efd2092d86a1b59c06f = L.polyline(
+                [[-25.4233146347775, -49.2160678044742], [-25.4936598469491, -49.3400481020638], [-25.4284, -49.2733], [-25.4300625729625, -49.2336060009616], [-25.4608672106041, -49.2047594214569], [-25.4233146347775, -49.2160678044742]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_18acd57a2195a443642a293a0b3af887 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_8d674f0c90ebd8a9cd870b77b30eafa5 = $(`<div id="html_8d674f0c90ebd8a9cd870b77b30eafa5" style="width: 100.0%; height: 100.0%;">Dia 4</div>`)[0];
+                popup_18acd57a2195a443642a293a0b3af887.setContent(html_8d674f0c90ebd8a9cd870b77b30eafa5);
+            
+        
+
+        poly_line_c644a072331a7efd2092d86a1b59c06f.bindPopup(popup_18acd57a2195a443642a293a0b3af887)
+        ;
+
+        
+    
+    
+            var marker_1ccb2d2cdbfe0e37aa6aacbb58c29047 = L.marker(
+                [-25.4233146347775, -49.2160678044742],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_9a9082fdd3b3d6d72301dfa6d27e26c1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_458c49cd143788791e39f23e42e9e24f = $(`<div id="html_458c49cd143788791e39f23e42e9e24f" style="width: 100.0%; height: 100.0%;">Dia 4 - Ponto 1</div>`)[0];
+                popup_9a9082fdd3b3d6d72301dfa6d27e26c1.setContent(html_458c49cd143788791e39f23e42e9e24f);
+            
+        
+
+        marker_1ccb2d2cdbfe0e37aa6aacbb58c29047.bindPopup(popup_9a9082fdd3b3d6d72301dfa6d27e26c1)
+        ;
+
+        
+    
+    
+            var marker_9e7ebe2af9c18d4c0bd9a8cc16072dbe = L.marker(
+                [-25.4936598469491, -49.3400481020638],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_e2592e43ae9e6064c3c0dbc4e3614ed6 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_1c7301d448b49de48029cd9e1b9df3cc = $(`<div id="html_1c7301d448b49de48029cd9e1b9df3cc" style="width: 100.0%; height: 100.0%;">Dia 4 - Ponto 2</div>`)[0];
+                popup_e2592e43ae9e6064c3c0dbc4e3614ed6.setContent(html_1c7301d448b49de48029cd9e1b9df3cc);
+            
+        
+
+        marker_9e7ebe2af9c18d4c0bd9a8cc16072dbe.bindPopup(popup_e2592e43ae9e6064c3c0dbc4e3614ed6)
+        ;
+
+        
+    
+    
+            var marker_a3c535beff1c3e3cdd50aab2c398abcc = L.marker(
+                [-25.4284, -49.2733],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_dd70f7865a1c195c7298a4e5bdbb603e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9874d01568c0769ad8ab0f5457da8ed9 = $(`<div id="html_9874d01568c0769ad8ab0f5457da8ed9" style="width: 100.0%; height: 100.0%;">Dia 4 - Ponto 3</div>`)[0];
+                popup_dd70f7865a1c195c7298a4e5bdbb603e.setContent(html_9874d01568c0769ad8ab0f5457da8ed9);
+            
+        
+
+        marker_a3c535beff1c3e3cdd50aab2c398abcc.bindPopup(popup_dd70f7865a1c195c7298a4e5bdbb603e)
+        ;
+
+        
+    
+    
+            var marker_fb72212e3a1970ef2e2b590191743001 = L.marker(
+                [-25.4300625729625, -49.2336060009616],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_cb27ecdf647beace6c96e15c3eae363a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_183ce56659697e0cd6659be4e6265a2a = $(`<div id="html_183ce56659697e0cd6659be4e6265a2a" style="width: 100.0%; height: 100.0%;">Dia 4 - Ponto 4</div>`)[0];
+                popup_cb27ecdf647beace6c96e15c3eae363a.setContent(html_183ce56659697e0cd6659be4e6265a2a);
+            
+        
+
+        marker_fb72212e3a1970ef2e2b590191743001.bindPopup(popup_cb27ecdf647beace6c96e15c3eae363a)
+        ;
+
+        
+    
+    
+            var marker_decb3a833fc7f528fbec159baac7deea = L.marker(
+                [-25.4608672106041, -49.2047594214569],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_40d26827002409d498215052f1ad1821 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_56bd91cf24854c145bd825a0b5a86b47 = $(`<div id="html_56bd91cf24854c145bd825a0b5a86b47" style="width: 100.0%; height: 100.0%;">Dia 4 - Ponto 5</div>`)[0];
+                popup_40d26827002409d498215052f1ad1821.setContent(html_56bd91cf24854c145bd825a0b5a86b47);
+            
+        
+
+        marker_decb3a833fc7f528fbec159baac7deea.bindPopup(popup_40d26827002409d498215052f1ad1821)
+        ;
+
+        
+    
+    
+            var marker_0bba8058c5146f9cfaaab29d9daa7167 = L.marker(
+                [-25.4233146347775, -49.2160678044742],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_dfe96bfa977cf2249eef036a7bdacd51 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_1236469a19e4dc5d0841552b1a01ef97 = $(`<div id="html_1236469a19e4dc5d0841552b1a01ef97" style="width: 100.0%; height: 100.0%;">Dia 4 - Ponto 6</div>`)[0];
+                popup_dfe96bfa977cf2249eef036a7bdacd51.setContent(html_1236469a19e4dc5d0841552b1a01ef97);
+            
+        
+
+        marker_0bba8058c5146f9cfaaab29d9daa7167.bindPopup(popup_dfe96bfa977cf2249eef036a7bdacd51)
+        ;
+
+        
+    
+    
+            var poly_line_c990bbc3d1e98520a7b9f84dabb44e12 = L.polyline(
+                [[-25.4233146347775, -49.2160678044742], [-25.4936598469491, -49.3400481020638], [-25.4284, -49.2733], [-25.4608672106041, -49.2047594214569], [-25.4300625729625, -49.2336060009616], [-25.4233146347775, -49.2160678044742]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_ee4a7ae387d37e29b6fc9b34b8db7853 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_bea7bd32e545ee95bbb21191916ec248 = $(`<div id="html_bea7bd32e545ee95bbb21191916ec248" style="width: 100.0%; height: 100.0%;">Dia 5</div>`)[0];
+                popup_ee4a7ae387d37e29b6fc9b34b8db7853.setContent(html_bea7bd32e545ee95bbb21191916ec248);
+            
+        
+
+        poly_line_c990bbc3d1e98520a7b9f84dabb44e12.bindPopup(popup_ee4a7ae387d37e29b6fc9b34b8db7853)
+        ;
+
+        
+    
+    
+            var marker_c1b02dff11698a72fedabcc7a06f5f39 = L.marker(
+                [-25.4233146347775, -49.2160678044742],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_5be74a6c1dad569abf771af61b7c1e42 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_dc7164a1eddbd212661592ad93259686 = $(`<div id="html_dc7164a1eddbd212661592ad93259686" style="width: 100.0%; height: 100.0%;">Dia 5 - Ponto 1</div>`)[0];
+                popup_5be74a6c1dad569abf771af61b7c1e42.setContent(html_dc7164a1eddbd212661592ad93259686);
+            
+        
+
+        marker_c1b02dff11698a72fedabcc7a06f5f39.bindPopup(popup_5be74a6c1dad569abf771af61b7c1e42)
+        ;
+
+        
+    
+    
+            var marker_38f057a6a2ebb9717ed60d9f054b56c2 = L.marker(
+                [-25.4936598469491, -49.3400481020638],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_56929e14e93dc615074e5a686acfe8de = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_880c3cd69ac4aeb1602feeb332b4aa0f = $(`<div id="html_880c3cd69ac4aeb1602feeb332b4aa0f" style="width: 100.0%; height: 100.0%;">Dia 5 - Ponto 2</div>`)[0];
+                popup_56929e14e93dc615074e5a686acfe8de.setContent(html_880c3cd69ac4aeb1602feeb332b4aa0f);
+            
+        
+
+        marker_38f057a6a2ebb9717ed60d9f054b56c2.bindPopup(popup_56929e14e93dc615074e5a686acfe8de)
+        ;
+
+        
+    
+    
+            var marker_765e1057f716bb58760ebe404f688e2a = L.marker(
+                [-25.4284, -49.2733],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_67114172fcd808a60f9ce52b586224e6 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ecffa93b71d202f07f14bf69860296cf = $(`<div id="html_ecffa93b71d202f07f14bf69860296cf" style="width: 100.0%; height: 100.0%;">Dia 5 - Ponto 3</div>`)[0];
+                popup_67114172fcd808a60f9ce52b586224e6.setContent(html_ecffa93b71d202f07f14bf69860296cf);
+            
+        
+
+        marker_765e1057f716bb58760ebe404f688e2a.bindPopup(popup_67114172fcd808a60f9ce52b586224e6)
+        ;
+
+        
+    
+    
+            var marker_ec4ae547089baf162e7c30add8bf7feb = L.marker(
+                [-25.4608672106041, -49.2047594214569],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_8a008e29b364238bbf9194478cd1ff19 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_cace4bdf5167d8d06a162f64f0db1c08 = $(`<div id="html_cace4bdf5167d8d06a162f64f0db1c08" style="width: 100.0%; height: 100.0%;">Dia 5 - Ponto 4</div>`)[0];
+                popup_8a008e29b364238bbf9194478cd1ff19.setContent(html_cace4bdf5167d8d06a162f64f0db1c08);
+            
+        
+
+        marker_ec4ae547089baf162e7c30add8bf7feb.bindPopup(popup_8a008e29b364238bbf9194478cd1ff19)
+        ;
+
+        
+    
+    
+            var marker_6cdec0934a1e020ca117327c34cf8652 = L.marker(
+                [-25.4300625729625, -49.2336060009616],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_02ab15d7a25c26f51e2e7cbe0a322bce = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d11e2b3680a0b869fc3aacc98d373c7d = $(`<div id="html_d11e2b3680a0b869fc3aacc98d373c7d" style="width: 100.0%; height: 100.0%;">Dia 5 - Ponto 5</div>`)[0];
+                popup_02ab15d7a25c26f51e2e7cbe0a322bce.setContent(html_d11e2b3680a0b869fc3aacc98d373c7d);
+            
+        
+
+        marker_6cdec0934a1e020ca117327c34cf8652.bindPopup(popup_02ab15d7a25c26f51e2e7cbe0a322bce)
+        ;
+
+        
+    
+    
+            var marker_123bf3fdcdbe0203db15c56c2c75cbd4 = L.marker(
+                [-25.4233146347775, -49.2160678044742],
+                {}
+            ).addTo(map_7ab6936c0a2f51e65b24cffa0c4385e2);
+        
+    
+        var popup_cc095ae309799362f8fd600ba3dbea81 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c18405b1d39c73c680a3732a810fd94c = $(`<div id="html_c18405b1d39c73c680a3732a810fd94c" style="width: 100.0%; height: 100.0%;">Dia 5 - Ponto 6</div>`)[0];
+                popup_cc095ae309799362f8fd600ba3dbea81.setContent(html_c18405b1d39c73c680a3732a810fd94c);
+            
+        
+
+        marker_123bf3fdcdbe0203db15c56c2c75cbd4.bindPopup(popup_cc095ae309799362f8fd600ba3dbea81)
+        ;
+
+        
+    
+</script>
+</html>
