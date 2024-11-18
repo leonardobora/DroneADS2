@@ -6,6 +6,7 @@ class Battery:
         """
         self.capacity = capacity  # Capacidade total da bateria (100%)
         self.current_charge = capacity  # Carga atual, começando com 100%
+        self.max_autonomy_seconds = 1800  # Autonomia máxima do drone em segundos (30 minutos)
 
     def consume_charge(self, time, mode="normal"):
         """

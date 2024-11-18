@@ -91,6 +91,15 @@ class TestGeneticAlgorithm(unittest.TestCase):
         # Verifica se o fitness é válido
         self.assertIsInstance(best_fitness, float)
         self.assertGreater(best_fitness, 0)
+    
+    def test_calculate_fitness_without_recharge(self):
+        route = self.ga.create_individual()
+        
+        # Verifica se o custo de recarga é um valor válido
+        # Agora, cada ponto pode ser um ponto de recarga, então não há necessidade de verificar pontos específicos
+        total_recharges = self.ga.calculate_recharge_cost(route, self.coordinates)
+        self.assertIsInstance(total_recharges, int)
+        self.assertGreaterEqual(total_recharges, 0)
 
 if __name__ == '__main__':
     unittest.main() 

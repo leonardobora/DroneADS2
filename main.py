@@ -1,3 +1,4 @@
+import logging
 from src.drone import Drone
 from src.battery import Battery
 from src.weather import Weather
@@ -5,11 +6,18 @@ from src.navigation import Navigation
 from src.route_manager import RouteManager
 from src.route_visualizer import RouteVisualizer
 from src.genetic_algorithm import DroneGeneticAlgorithm
+from src.csv_writer import CSVWriter
+from src.cep_mapper import CEPMapper
+from typing import List, Tuple
+from datetime import datetime, timedelta
+
+# Configuração do logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def simulate_day_route(route, base_position, day_number):
     """Simula a rota de um dia e retorna estatísticas"""
     drone = Drone(base_position, Battery(100), Weather(), Navigation())
-    initial_autonomy = drone.remaining_autonomy = 28800  # 8 horas
+    initial_autonomy = drone.remaining_autonomy = 1800  # 30 minutos em segundos
     
     total_distance = 0
     total_time = 0
@@ -45,62 +53,67 @@ def simulate_day_route(route, base_position, day_number):
         'recharge_count': recharge_count
     }
 
+def get_genetic_algorithm_config() -> dict:
+    """Retorna a configuração do algoritmo genético."""
+    return {
+        'population_size': 200,    # Tamanho da população
+        'generations': 1000,        # Número de gerações
+        'mutation_rate': 0.2,     # Taxa de mutação
+        'elite_size': 60           # Número de melhores indivíduos a preservar
+    }
+
 def main():
-    print("=== Sistema de Entrega por Drone - Otimização 5 dias ===")
+    logging.info("=== Sistema de Entrega por Drone - Otimização com Todos os CEPs ===")
     
-    # Reduz para 100 pontos (20 por dia)
-    route_manager = RouteManager('data/coordenadas.csv', limit=100)
+    # Instanciar o CEPMapper
+    cep_mapper = CEPMapper('data/coordenadas.csv')  
+    
+    # Usar todos os pontos disponíveis
+    route_manager = RouteManager('data/coordenadas.csv')
     visualizer = RouteVisualizer(route_manager)
     base_position = (-49.2160678044742, -25.4233146347775)
     
-    # Pontos de recarga estratégicos
-    charging_points = [
-        (-49.2733, -25.4284),      # Centro
-        (-49.2336060009616, -25.4300625729625),  # Norte
-        (-49.2047594214569, -25.4608672106041),  # Leste
-        (-49.3400481020638, -25.4936598469491),  # Oeste
-    ]
-    
-    # Divide pontos em 5 grupos
-    points_per_day = len(route_manager.coordinates) // 5
-    daily_points = [route_manager.coordinates[i:i + points_per_day] 
-                   for i in range(0, len(route_manager.coordinates), points_per_day)]
+    # 
+    daily_routes = route_manager.plan_multi_day_route(base_position, days=5, autonomy=1800)
     
     all_routes = []
     analysis_data = {}
     
-    for day, points in enumerate(daily_points, 1):
-        print(f"\nDia {day}: Otimizando {len(points)} pontos...")
-        
-        # Adiciona pontos de recarga aos pontos do dia
-        day_points = points + charging_points
+    # Obter configuração do algoritmo genético
+    ga_config = get_genetic_algorithm_config()
+    
+    for day, points in enumerate(daily_routes, 1):
+        logging.info(f"\nDia {day}: Otimizando {len(points)} pontos...")
         
         ga = DroneGeneticAlgorithm(
-            coordinates=day_points,
+            coordinates=points,
             base_position=base_position,
-            population_size=50,    # Reduzido
-            generations=20,        # Reduzido
-            mutation_rate=0.2,     # Aumentado para mais diversidade
-            elite_size=5
+            cep_mapper=cep_mapper,  
+            population_size=ga_config['population_size'],
+            generations=ga_config['generations'],
+            mutation_rate=ga_config['mutation_rate'],
+            elite_size=ga_config['elite_size']
         )
         
-        best_route, best_fitness = ga.optimize(verbose=False)  # Reduz logs
+        best_route, best_fitness = ga.optimize(verbose=False)
         all_routes.append(best_route)
         
         stats = simulate_day_route(best_route, base_position, day)
         analysis_data[str(day)] = stats
         
-        print(f"✓ Rota otimizada: {len(best_route)} pontos, {stats['total_distance']:.1f}km")
+        logging.info(f"✓ Rota otimizada: {len(best_route)} pontos, {stats['total_distance']:.1f}km")
     
-    print("\nGerando visualização...")
-    visualizer.create_map(all_routes, analysis_data)
+    # Salva o mapa final
+    visualizer.create_map(all_routes, analysis_data, filename='route_map.html')
     
-    print("\n=== Sumário Final ===")
-    total_distance = sum(data['total_distance'] for data in analysis_data.values())
-    total_recharges = sum(data['recharge_count'] for data in analysis_data.values())
-    print(f"Pontos visitados: {sum(len(route) for route in all_routes)}")
-    print(f"Distância total: {total_distance:.1f}km")
-    print(f"Recargas: {total_recharges}")
+    # Criar CSVWriter com o cep_mapper
+    csv_writer = CSVWriter(cep_mapper)
+    # Supondo que você tenha uma função para gerar os dados da rota
+    route_data = [cep_mapper.map_to_cep(point) for route in all_routes for point in route]
+    csv_writer.write_route('rota_final.csv', route_data)
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        logging.error(f"Erro ao executar o programa: {e}")

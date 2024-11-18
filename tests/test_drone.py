@@ -5,6 +5,7 @@ from src.drone import Drone
 from src.battery import Battery
 from src.weather import Weather
 from src.navigation import Navigation
+from src.cep_mapper import CEPMapper
 import math
 
 class TestDrone(unittest.TestCase):
@@ -12,11 +13,13 @@ class TestDrone(unittest.TestCase):
         self.battery = Battery(capacity=100)
         # Usando uma coordenada real de Curitiba como ponto inicial
         self.initial_position = (-49.2160678044742, -25.4233146347775)  # CEP: 82821020
+        self.cep_mapper = CEPMapper('data/coordenadas.csv')
         self.drone = Drone(
             initial_position=self.initial_position,
             battery=self.battery,
             weather=Weather(),
-            navigation=Navigation()
+            navigation=Navigation(),
+            cep_mapper=self.cep_mapper
         )
         self.drone.remaining_autonomy = 3600  # 1 hora de autonomia inicial
 
@@ -93,6 +96,28 @@ class TestDrone(unittest.TestCase):
         success = self.drone.move_to(target_position)
         self.assertFalse(success, "O drone não deveria conseguir fazer este voo")
         self.assertEqual(self.drone.position, self.initial_position)
+
+    def test_can_reach_with_recharge(self):
+        # Testa se o drone pode alcançar um ponto e se precisa recarregar
+        target_position = (-49.2047594214569, -25.4608672106041)  # CEP: 82930390
+        self.drone.remaining_autonomy = 300  # Apenas 5 minutos
+        
+        # O movimento deve falhar devido à autonomia insuficiente
+        success = self.drone.move_to(target_position)
+        self.assertFalse(success, "O drone não deveria conseguir fazer este voo")
+        
+        # Verifica se o drone precisa retornar a um ponto de recarga
+        charging_point = self.drone.find_nearest_charging_point(self.drone.position)
+        self.assertIsNotNone(charging_point, "Deve encontrar um ponto de recarga próximo")
+
+    def test_move_to_charging_point(self):
+        # Testa se o drone se move para um ponto de recarga
+        self.drone.remaining_autonomy = 7200  # 2 horas de autonomia
+        charging_point = (-49.2733, -25.4284)  # Ponto de recarga
+        
+        success = self.drone.move_to(charging_point)
+        self.assertTrue(success, "O drone deve conseguir mover-se para o ponto de recarga")
+        self.assertEqual(self.drone.position, charging_point, "A posição do drone deve ser o ponto de recarga")
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,7 +1,8 @@
 from typing import List, Tuple, Dict
-from datetime import datetime, timedelta
+from datetime import datetime
 import csv
 from src.cep_mapper import CEPMapper
+import os
 
 class CSVWriter:
     """
@@ -9,7 +10,11 @@ class CSVWriter:
     data,horario_saida,horario_chegada,cep_origem,cep_destino,coord_origem,coord_destino,velocidade,pouso
     """
     def __init__(self, cep_mapper: CEPMapper):
+        if cep_mapper is None:
+            raise ValueError("cep_mapper não pode ser None")
         self.cep_mapper = cep_mapper
+        self.output_dir = 'output'
+        os.makedirs(self.output_dir, exist_ok=True)  # Cria a pasta output se não existir
 
     def format_coord(self, coord: Tuple[float, float]) -> str:
         """Formata coordenadas como string no formato 'longitude,latitude'"""
@@ -34,7 +39,8 @@ class CSVWriter:
             'landing': bool
         }
         """
-        with open(filename, 'w', newline='') as csvfile:
+        filepath = os.path.join(self.output_dir, filename)  # Caminho completo do arquivo
+        with open(filepath, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             
             # Escreve cabeçalho

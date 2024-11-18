@@ -1,6 +1,7 @@
 import folium
 from typing import List, Tuple
 from src.route_manager import RouteManager
+import os
 
 class RouteVisualizer:
     def __init__(self, route_manager: RouteManager):
@@ -75,5 +76,8 @@ class RouteVisualizer:
         # Adiciona o painel ao mapa
         m.get_root().html.add_child(folium.Element(html))
         
-        # Salva com nome personalizado
-        m.save(filename) 
+        # Salva o mapa na pasta output
+        output_dir = 'output'
+        os.makedirs(output_dir, exist_ok=True)  # Cria a pasta output se não existir
+        output_file = os.path.join(output_dir, filename)
+        m.save(output_file) 

@@ -25,6 +25,7 @@ class CEPMapper:
         """
         Carrega CEPs e coordenadas do CSV.
         Formato esperado: cep,longitude,latitude
+        Armazena coordenadas no formato (latitude, longitude) para compatibilidade com Navigation
         """
         import csv
         try:
@@ -32,7 +33,8 @@ class CEPMapper:
                 reader = csv.DictReader(file)
                 for row in reader:
                     try:
-                        coord = (float(row['longitude']), float(row['latitude']))
+                        # Invertemos a ordem para (latitude, longitude) ao armazenar
+                        coord = (float(row['latitude']), float(row['longitude']))
                         cep = self.format_cep(row['cep'])
                         if self.validate_cep(cep):
                             self.cep_map[coord] = cep
@@ -47,12 +49,12 @@ class CEPMapper:
     def get_cep(self, coord: Tuple[float, float], max_distance: float = 1.0) -> Optional[str]:
         """
         Retorna CEP exato ou mais próximo das coordenadas dentro de uma distância máxima.
-        :param coord: Tupla (longitude, latitude)
+        :param coord: Tupla (latitude, longitude)
         :param max_distance: Distância máxima em km para considerar um CEP válido
         :return: CEP correspondente ou None se nenhum CEP estiver dentro da distância máxima
         """
         if not isinstance(coord, tuple) or len(coord) != 2:
-            raise ValueError("Coordenadas devem ser uma tupla (longitude, latitude)")
+            raise ValueError("Coordenadas devem ser uma tupla (latitude, longitude)")
             
         if coord in self.cep_map:
             return self.cep_map[coord]
@@ -72,7 +74,7 @@ class CEPMapper:
         """
         Retorna coordenadas para um CEP.
         :param cep: CEP a buscar (formato XXXXX-XXX ou XXXXXXXX)
-        :return: Tupla (longitude, latitude) ou None se não encontrado
+        :return: Tupla (latitude, longitude) ou None se não encontrado
         """
         try:
             formatted_cep = self.format_cep(cep)
